@@ -9,6 +9,10 @@
 <meta property="og:description" content="Backend and platform engineer: Java, Spring Boot, Kafka, Kubernetes, AWS. 8+ years of production systems.">
 <meta property="og:url" content="https://maheshmokale.com">
 <meta property="og:image" content="https://maheshmokale.com/photo.jpg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0B1A3A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -175,7 +179,7 @@ section{padding:96px 0 0;scroll-margin-top:40px}
 .proj p{margin:0 0 8px;font-size:15px}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .tags span{font-size:12.5px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
-@media (max-width:760px){.projects{grid-template-columns:1fr}.job{padding-left:0}.logo{position:static;margin-bottom:12px;box-shadow:none}.tl::before{display:none}}
+@media (max-width:760px){.projects{grid-template-columns:1fr}.job{padding-left:0}.logo{position:relative;left:auto;top:auto;margin-bottom:12px;box-shadow:none}.tl::before{display:none}}
 
 /* skills */
 .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -229,6 +233,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);font-size:14px;text-ali
 .ev .banner img.ev-logo{position:absolute;inset:auto auto 50% 50%;transform:translate(-50%,50%);width:auto;height:84px;max-width:70%;object-fit:contain;border-radius:18px;box-shadow:0 8px 20px -6px rgba(0,0,0,.45)}
 .sk span{display:inline-flex;align-items:center;gap:6px}
 .sk span img{width:16px;height:16px;object-fit:contain}
+[data-theme="dark"] .sk span img.dark-ink{filter:invert(1) hue-rotate(180deg)}
 .ev p.take{margin-top:10px;padding-left:12px;border-left:3px solid var(--amber);color:var(--muted);font-size:14.5px}
 .ev .banner.hacker{background:linear-gradient(135deg,#F08A5D,var(--amber))}
 .ev .banner.attendee{background:linear-gradient(135deg,#2A1FB8,#6A5CF0)}
@@ -724,9 +729,12 @@ mark.hl{color:inherit;background:linear-gradient(transparent 58%,color-mix(in sr
   })();
 
   // Tech icons: shown when logos/tech/<name>.svg exists, otherwise skipped
+  // Logos drawn in black or dark ink get flipped for the dark theme
+  var darkIcons = ['java', 'groovy', 'kafka', 'temporal', 'mysql', 'aws', 'helm', 'jwt'];
   document.querySelectorAll('.sk span').forEach(function(el){
     var slug = el.textContent.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
     var img = new Image(); img.alt = '';
+    if (darkIcons.indexOf(slug) > -1) img.className = 'dark-ink';
     img.onload = function(){ el.prepend(img); };
     img.src = 'logos/tech/' + slug + '.svg';
   });
